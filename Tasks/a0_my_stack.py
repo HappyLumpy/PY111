@@ -3,6 +3,7 @@ My little Stack
 """
 from typing import Any
 
+_stack = []
 
 def push(elem: Any) -> None:
     """

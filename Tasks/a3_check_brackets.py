@@ -1,6 +1,3 @@
-import re
-
-
 def check_brackets(brackets_row: str) -> bool:
     """
     Check whether input string is a valid bracket sequence

@@ -15,6 +15,8 @@ def check_brackets(brackets_row: str) -> bool:
             count_brackets += 1
         if brackets == ')':
             count_brackets -= 1
+        if count_brackets == -1:
+            break
     if count_brackets == 0:
         return True
     else:

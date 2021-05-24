@@ -8,13 +8,10 @@ def check_brackets(brackets_row: str) -> bool:
     count_brackets = 0
 
     for brackets in brackets_row:
-        if brackets == '(' and count_brackets != -1:
+        if brackets == '(':
             count_brackets += 1
         if brackets == ')':
             count_brackets -= 1
         if count_brackets == -1:
             break
-    if count_brackets == 0:
-        return True
-    else:
-        return False
+    return count_brackets == 0

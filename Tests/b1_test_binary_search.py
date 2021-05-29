@@ -11,6 +11,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(5, binary_search(5, self.arr), msg="Invalid index returned!")
         self.assertEqual(54, binary_search(54, self.arr), msg="Invalid index returned!")
         self.assertEqual(1, binary_search(2, [1, 2, 2, 2]), msg="You should return first occurrence from the array.")
+        self.assertEqual(1, binary_search(2, [1, 2, 2, 2, 2, 2, 2, 2, 2]),
+                         msg="You should return first occurrence from the array.")
+        self.assertEqual(0, binary_search(2, [2, 2, 2, 2, 2, 2, 2, 2]),
+                         msg="You should return first occurrence from the array.")
 
     def test_missing(self):
         self.assertIsNone(binary_search(-1, self.arr),

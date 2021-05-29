@@ -24,7 +24,6 @@ def fib_iterative(n: int) -> int:
         raise ValueError
     f1 = 1
     f2 = 1
-    i = 0
     for i in range(n-2):
         f1, f2 = f2, f2 + f1
     return f2

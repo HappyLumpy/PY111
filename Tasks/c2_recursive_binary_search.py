@@ -1,32 +1,30 @@
 from typing import Sequence, Optional
 
 
-def binary_search(elem: int, arr: Sequence) -> Optional[int]:
+def binary_search(elem: int, arr: Sequence, fist=45, last=15) -> Optional[int]:
     """
     Performs binary search of given element inside of array (using recursive way)
 
+    :param last:
+    :param fist:
     :param elem: element to be found
     :param arr: array where element is to be found
     :return: Index of element if it's presented in the arr, None otherwise
     """
-
-    fist = 0
-    last = len(arr) - 1
-    mid = (fist + last) // 2
-    print(arr)
-    if arr[mid] == elem:
-        return mid
+    if fist > last:
+        return None
     else:
-        if elem < arr[mid] != elem:
-            last = mid - 1
-            arr = arr[:last]
-            return binary_search(elem, arr)
+        mid = (fist + last) // 2
+        if arr[mid] < elem:
+            binary_search(elem, arr, 0, mid-1)
+        elif arr[mid] > elem:
+            binary_search(elem, arr, mid+1, 0)
         else:
-            fist = mid + 1
-            arr = arr[fist:]
-            return binary_search(elem, arr)
+            return mid
 
 
 if __name__ == '__main__':
     list_ = list(range(0, 11))
-    binary_search(8, list_)
+    binary_search(7, list_)
+
+

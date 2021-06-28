@@ -13,8 +13,12 @@ def ex(x: Union[int, float]) -> float:
     :return: e^x value
     """
     e = 0
+    f = 1
     for i in range(0, 100):
-        e = e + (x ** i) / math.factorial(i)
+        f *= i
+        if f == 0:
+            f = 1
+        e = e + (x ** i) / f
     return e
 
 
@@ -26,12 +30,16 @@ def sinx(x: Union[int, float]) -> float:
     :return: sin(x) value
     """
     e = 0
+    q = x
     for i in range(0, 50):
-        e = e + (((-1) ** i) * (x ** (1 + 2 * i))) / math.factorial(1 + 2 * i)
+        if i != 0:
+            q = q * (-1) * (x * x) / ((2 * i + 1) * (2 * i))
+        e += q
     return e
 
 
 if __name__ == '__main__':
     print(sinx(1.55433))
     print(math.sin(1.55433))
-    print(ex(6))
+    print(ex(1.55433))
+    print(math.exp(1.55433))

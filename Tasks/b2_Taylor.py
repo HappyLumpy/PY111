@@ -12,12 +12,10 @@ def ex(x: Union[int, float]) -> float:
     :param x: x value
     :return: e^x value
     """
-    e = 0
+    e = 1
     f = 1
-    for i in range(0, 100):
+    for i in range(1, 100):
         f *= i
-        if f == 0:
-            f = 1
         e = e + (x ** i) / f
     return e
 
@@ -29,11 +27,10 @@ def sinx(x: Union[int, float]) -> float:
     :param x: x value
     :return: sin(x) value
     """
-    e = 0
+    e = x
     q = x
-    for i in range(0, 50):
-        if i != 0:
-            q = q * (-1) * (x * x) / ((2 * i + 1) * (2 * i))
+    for i in range(1, 50):
+        q = q * (-1) * (x * x) / ((2 * i + 1) * (2 * i))
         e += q
     return e
 

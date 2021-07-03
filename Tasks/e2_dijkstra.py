@@ -11,8 +11,11 @@ def dijkstra_algo(g: nx.DiGraph, starting_node: Hashable) -> Mapping[Hashable, U
     :param starting_node: starting node from g
     :return: dict like {'node1': 0, 'node2': 10, '3': 33, ...} with path costs, where nodes are nodes from g
     """
+    s = {}
+    for i in g:
+        s[i] = float("inf")
     queue = deque()
-    s = {starting_node: 0}
+    s[starting_node] = 0
     queue.append(starting_node)
     while queue:
         v = queue.pop()
@@ -20,6 +23,7 @@ def dijkstra_algo(g: nx.DiGraph, starting_node: Hashable) -> Mapping[Hashable, U
             if u not in s or s[v] + g[v][u]['weight'] < s[u]:
                 s[u] = s[v] + g[v][u]['weight']
                 queue.append(u)
+
     return s
 
 
@@ -39,5 +43,5 @@ if __name__ == '__main__':
         ("D", "A", 2),
     ])
     print(dijkstra_algo(G, "A"))
-    nx.draw(G)
+
 # {'A': 3, 'B': 4, 'C': 7, 'D': 1, 'E': 3, 'F': 6, 'G': 0}

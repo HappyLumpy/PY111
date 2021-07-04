@@ -14,7 +14,7 @@ def create_node(key, value):
     return {'key': key, 'value': value, 'left': None, 'right': None}
 
 
-def _find(key) -> Tuple[Optional[dict],Optional[dict]]:
+def _find(key) -> Tuple[Optional[dict], Optional[dict]]:
     global root
     prev_root = None
     current_root = root
@@ -27,7 +27,8 @@ def _find(key) -> Tuple[Optional[dict],Optional[dict]]:
             current_root = current_root['left']
         else:
             break
-    return prev_root,current_root
+    return prev_root, current_root
+
 
 def insert(key: int, value: Any) -> None:
     """
@@ -75,35 +76,37 @@ def remove(key: int) -> Optional[Tuple[int, Any]]:
     current_node_left = current['left']
     prev_node_right = None
     prev_node_left = None
-    if root['key'] == current['key']:
-        while current_node_right ['left'] is not None:
+    if root['key'] == current['key']:  # Удаление начала
+        if prev is None:
+            clear()
+            return current['key'],current['value']
+        else:
+            while current_node_right['left'] is not None:
                 prev_node_right = current_node_right
                 current_node_right = current_node_right['left']
-        root = current_node_right
-        prev_node_right['left'] = None
-        root['right'] = current['right']
-        root['left'] = current['left']
-        return current['key'],current['value']
-    if current['left'] is None and current['right'] is None:
+            root = current_node_right
+            root['right'] = current['right']
+            root['left'] = current['left']
+            return current['key'],current['value']
+    elif current['left'] is None and current['right'] is None:
         if prev['key'] > current['key']:
             prev['left'] = None
             return current['key'],current['value']
         elif prev['key'] < current['key']:
             prev['right'] = None
-            return current['key']['value']
-    if current['left'] is not None and current['right'] is None:
+            return current['key'],current['value']
+    elif current['left'] is not None and current['right'] is None:
         prev['left'] = current['left']
         return current['key'],current['value']
-    if current['right'] is not None and current['left'] is None:
-        prev['left'] = current['right']
+    elif current['right'] is not None and current['left'] is None:
+        prev['right'] = current['right']
         return current['key'],current['value']
-    if current['right'] is not None and current['left'] is not None:
-        if root['key'] < current['key']:
+    elif current['right'] is not None and current['left'] is not None:
+        if root['key'] < current['key']:  # Удаление справа
             if current['left']['right'] is not None:
                 while current_node_left['right'] is not None:
                     prev_node_left = current_node_left
                     current_node_left = current_node_left['right']
-                    break
                 prev['left'] = current_node_left
                 current_node_left['right'] = current['right']
                 current_node_left['left'] = current['left']
@@ -113,12 +116,11 @@ def remove(key: int) -> Optional[Tuple[int, Any]]:
                 prev['left'] = current['right']
                 current['right']['left'] = current['left']
                 return current['key'],current['value']
-        if root['key'] > current['key']:
+        if root['key'] > current['key']:  # Удаление слева
             if current['left']['right'] is not None:
-                while current_node_right ['left'] is not None:
+                while current_node_right['left'] is not None:
                     prev_node_right = current_node_right
                     current_node_right = current_node_right['left']
-                    break
                 prev['left'] = current_node_right
                 current_node_right['left'] = current['left']
                 current_node_right['right'] = current['right']
@@ -167,21 +169,11 @@ def clear() -> None:
 
 def main():
     clear()
-    insert(15,'это 15')
-    insert(10, 'это 10')
-    insert(12, 'это 12')
-    insert(14, 'это 14')
-    insert(11, 'это 11')
-    insert(5, 'это 5')
-    insert(7, 'это 7')
-    insert(3, 'это 3')
-    insert(20, 'это 20')
-    insert(25, 'это 25')
-    insert(30, 'это 30')
-    insert(18, 'это 18')
-    insert(19, 'это 19')
-    insert(16, 'это 16')
-    print(remove(20))
+    insert(15, 'это 15')
+
+    print(root)
+    print(remove(15))
+
 
 if __name__ == '__main__':
     main()

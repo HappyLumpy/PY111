@@ -9,21 +9,23 @@ def sort(container: List[int]) -> List[int]:
     :param container: container of elements to be sorted
     :return: container sorted in ascending order
     """
-    result = []
     if len(container) < 2:
         return container
+    result = []
     mid = int(len(container) / 2)
     container_left = sort(container[:mid])
     container_right = sort(container[mid:])
-    while len(container_left) > 0 and len(container_right) > 0:
-        if container_left[0] > container_right[0]:
-            result.append(container_right[0])
-            container_right.pop(0)
+    i = 0
+    j = 0
+    while i < len(container_left) and j < len(container_right):
+        if container_left[i] > container_right[j]:
+            result.append(container_right[j])
+            j += 1
         else:
-            result.append(container_left[0])
-            container_left.pop(0)
-    result += container_left
-    result += container_right
+            result.append(container_left[i])
+            i += 1
+    result += container_left[i:]
+    result += container_right[j:]
     return result
 
 

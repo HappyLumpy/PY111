@@ -69,6 +69,10 @@ def remove(key: int) -> Optional[Tuple[int, Any]]:
         if prev is None and current['right'] is None and current['left'] is None:
             clear()
             return current['key'], current['value']
+        elif current['right'] is not None and current['left'] is None:
+            root = current_node_right
+        elif current['right'] is None and current['left'] is not None:
+            root = current_node_left
         else:
             while current_node_right['left'] is not None:
                 current_node_right = current_node_right['left']
@@ -159,6 +163,7 @@ def clear() -> None:
 
 def main():
     clear()
+    """Просто дерево"""
     insert(15, 'это 15')
     insert(10, 'это 10')
     insert(12, 'это 12')
@@ -186,9 +191,34 @@ def main():
     print(remove(24))
     print(root)
     clear()
+    """Дерево корень"""
     print(root)
     insert(15, 'это 15')
     print(remove(15))
+    clear()
+    """Дерево в одну сторону направо"""
+    insert(1, 'это 1')
+    insert(2, 'это 2')
+    insert(3, 'это 3')
+    insert(4, 'это 4')
+    insert(5, 'это 5')
+    insert(6, 'это 6')
     print(root)
+    print(remove(1))
+    print(root)
+    clear()
+    """Дерево в одну сторону налево"""
+    insert(6, 'это 6')
+    insert(5, 'это 5')
+    insert(4, 'это 4')
+    insert(3, 'это 3')
+    insert(2, 'это 2')
+    insert(1, 'это 1')
+    print(root)
+    print(remove(6))
+    print(root)
+    clear()
+
+
 if __name__ == '__main__':
     main()
